@@ -4,7 +4,7 @@ services:
     build:
       args:
         user: sammy
-        uid: 1000
+        uid: ${UID:-1000}
       context: ./
     image: minicli-php8-dev
     restart: unless-stopped
