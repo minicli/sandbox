@@ -8,21 +8,11 @@ if (php_sapi_name() !== 'cli') {
 require __DIR__ . '/vendor/autoload.php';
 
 use Minicli\App;
-use Minicli\Command\CommandCall;
 
-$app = new App();
-
-$app->setSignature('./minicli debug');
-
-$app->registerCommand('debug', function(CommandCall $input) use($app) {
-    $printer = $app->getPrinter();
-    $printer->info("Minicli 2.0 Sandbox", true);
-    $printer->info("System info: PHP " . PHP_VERSION . PHP_EXTRA_VERSION);
-    $printer->success("Input info:");
-
-    var_dump($input);
-
-    $printer->display("Check https://docs.minicli.dev for documentation.");
-});
+$app = new App([
+    'app_path' => __DIR__.'/app/Command',
+    'theme' => '\Unicorn',
+    'debug' => false
+]);
 
 $app->runCommand($argv);
